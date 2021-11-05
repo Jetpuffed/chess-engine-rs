@@ -1,12 +1,12 @@
 //! <Module description goes here>
 
-/// Defines a value that represents a set of 64 individual bits.
+/// Value that represents a set of 64 individual bits.
 type Bitboard = u64;
 
-/// Defines a value that represents a location in a bitboard mapping.
+/// Value that represents a location in a bitboard mapping.
 type Square = Bitmap;
 
-/// Little-Endian Rank-File Mapping
+/// Little-Endian Rank-File Mapping.
 #[repr(C)]
 enum Bitmap
 {
@@ -20,7 +20,15 @@ enum Bitmap
     A8, B8, C8, D8, E8, F8, G8, H8,
 }
 
-/// A dense board structure that contains bitboards for individual piece types.
+/// Defines what exactly a specific piece is and what routines can be performed on it.
+trait Piece
+{
+    const ID: u64;
+    fn get_color(&self);
+    fn get_piece(&self);
+}
+
+/// Dense board structure that contains bitboards for individual piece types.
 struct Board
 {
     pawn: Bitboard,
