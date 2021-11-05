@@ -1,5 +1,13 @@
 //! <Module description goes here>
 
+/// Defines a value that represents a set of 64 individual bits.
+type Bitboard = u64;
+
+/// Defines a value that represents a location in a bitboard mapping.
+type Square = Bitmap;
+
+/// Little-Endian Rank-File Mapping
+#[repr(C)]
 enum Bitmap
 {
     A1, B1, C1, D1, E1, F1, G1, H1,
@@ -11,3 +19,5 @@ enum Bitmap
     A7, B7, C7, D7, E7, F7, G7, H7,
     A8, B8, C8, D8, E8, F8, G8, H8,
 }
+
+
