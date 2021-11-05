@@ -41,35 +41,23 @@ trait Piece
 /// Subtrait of `Piece` containing all operations unique to a pawn.
 trait Pawn : Piece
 {
-    fn make_move(&self) {}
+    fn single_push(&self);
+    fn double_push(&self);
+    fn en_passant(&self);
+    fn promote(&self);
 }
 
 /// Subtrait of `Piece` containing all operations unique to a knight.
-trait Knight : Piece
-{
-    fn make_move(&self) {}
-}
+trait Knight : Piece {}
 
 /// Subtrait of `Piece` containing all operations unique to a bishop.
-trait Bishop : Piece 
-{
-    fn make_move(&self) {}
-}
+trait Bishop : Piece  {}
 
 /// Subtrait of `Piece` containing all operations unique to a rook.
-trait Rook : Piece
-{
-    fn make_move(&self) {}
-}
+trait Rook : Piece {}
 
 /// Subtrait of `Piece` containing all operations unique to a queen.
-trait Queen : Piece
-{
-    fn make_move(&self) {}
-}
+trait Queen : Piece {}
 
 /// Subtrait of `Piece` containing all operations unique to a king.
-trait King : Piece
-{
-    fn make_move(&self) {}
-}
+trait King : Piece {}
