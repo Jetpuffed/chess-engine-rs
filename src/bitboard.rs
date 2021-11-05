@@ -20,7 +20,7 @@ enum Bitmap
     A8, B8, C8, D8, E8, F8, G8, H8,
 }
 
-/// Defines what exactly a specific piece is and what routines can be performed on it.
+/// Piece-specific operations with a unique identifer.
 trait Piece
 {
     const ID: u64;
