@@ -20,12 +20,9 @@ enum Bitmap
     A8, B8, C8, D8, E8, F8, G8, H8,
 }
 
-/// A dense board structure that contains bitboards for individual color
-/// locations as well as the locations for the individual piece types.
+/// A dense board structure that contains bitboards for individual piece types.
 struct Board
 {
-    white: Bitboard,
-    black: Bitboard,
     pawn: Bitboard,
     knight: Bitboard,
     bishop: Bitboard,
