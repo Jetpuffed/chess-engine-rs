@@ -20,14 +20,6 @@ enum Bitmap
     A8, B8, C8, D8, E8, F8, G8, H8,
 }
 
-/// Piece-specific operations with a unique identifer.
-trait Piece
-{
-    const ID: u64;
-    fn get_color(&self);
-    fn get_piece(&self);
-}
-
 /// Dense board structure that contains bitboards for individual piece types.
 struct Board
 {
@@ -37,4 +29,47 @@ struct Board
     rook: Bitboard,
     queen: Bitboard,
     king: Bitboard,
+}
+
+/// Supertrait containing all operations a subtrait must implement in order to be a valid piece.
+trait Piece
+{
+    const ID: u64;
+    fn make_move(&self);
+}
+
+/// Subtrait of `Piece` containing all operations unique to a pawn.
+trait Pawn : Piece
+{
+    fn make_move(&self) {}
+}
+
+/// Subtrait of `Piece` containing all operations unique to a knight.
+trait Knight : Piece
+{
+    fn make_move(&self) {}
+}
+
+/// Subtrait of `Piece` containing all operations unique to a bishop.
+trait Bishop : Piece 
+{
+    fn make_move(&self) {}
+}
+
+/// Subtrait of `Piece` containing all operations unique to a rook.
+trait Rook : Piece
+{
+    fn make_move(&self) {}
+}
+
+/// Subtrait of `Piece` containing all operations unique to a queen.
+trait Queen : Piece
+{
+    fn make_move(&self) {}
+}
+
+/// Subtrait of `Piece` containing all operations unique to a king.
+trait King : Piece
+{
+    fn make_move(&self) {}
 }
