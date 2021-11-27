@@ -1,14 +1,11 @@
 //! <Module description goes here>
 
 /// Value that represents a set of 64 individual bits.
-type Bitboard = u64;
-
-/// Value that represents a location in a bitboard mapping.
-type Square = Bitmap;
+pub type Bitboard = u64;
 
 /// Little-Endian Rank-File Mapping.
 #[repr(C)]
-enum Bitmap
+pub enum Map
 {
     A1, B1, C1, D1, E1, F1, G1, H1,
     A2, B2, C2, D2, E2, F2, G2, H2,
@@ -21,43 +18,63 @@ enum Bitmap
 }
 
 /// Dense board structure that contains bitboards for individual piece types.
-struct Board
+pub struct Board
 {
-    pawn: Bitboard,
+    white:  Bitboard,
+    black:  Bitboard,
+    pawn:   Bitboard,
     knight: Bitboard,
     bishop: Bitboard,
-    rook: Bitboard,
-    queen: Bitboard,
-    king: Bitboard,
+    rook:   Bitboard,
+    queen:  Bitboard,
+    king:   Bitboard,
 }
 
-/// Supertrait containing all operations a subtrait must implement in order to be a valid piece.
-trait Piece
+impl Board
 {
-    const ID: u64;
-    fn make_move(&self);
+    /// Creates a new board with custom starting positions.
+    fn new() -> Self { todo!() }
+
+    /// Get the positions of all white pieces.
+    fn get_white(&self) -> Bitboard { self.white }
+
+    /// Get the positions of all black pieces.
+    fn get_black(&self) -> Bitboard { self.black }
+
+    /// Get the positions of all pawns, regardless of color.
+    fn get_pawns(&self) -> Bitboard { self.pawn }
+
+    /// Get the positions of all knights, regardless of color.
+    fn get_knights(&self) -> Bitboard { self.knight }
+
+    /// Get the positions of all bishops, regardless of color.
+    fn get_bishops(&self) -> Bitboard { self.bishop }
+
+    /// Get the positions of all rooks, regardless of color.
+    fn get_rooks(&self) -> Bitboard { self.rook }
+
+    /// Get the positions of all queens, regardless of color.
+    fn get_queens(&self) -> Bitboard { self.queen }
+
+    /// Get the positions of all kings, regardless of color.
+    fn get_kings(&self) -> Bitboard { self.king }
 }
 
-/// Subtrait of `Piece` containing all operations unique to a pawn.
-trait Pawn : Piece
+impl Default for Board
 {
-    fn single_push(&self);
-    fn double_push(&self);
-    fn en_passant(&self);
-    fn promote(&self);
+    /// Creates a new board with the default starting positions.
+    fn default() -> Self
+    {
+        Self
+        {
+            white:  0x000000000000FFFF,
+            black:  0xFFFF000000000000,
+            pawn:   0x00FF00000000FF00,
+            knight: 0x2400000000000024,
+            bishop: 0x4200000000000042,
+            rook:   0x8100000000000081,
+            queen:  0x0800000000000008,
+            king:   0x1000000000000010,
+        }
+    }
 }
-
-/// Subtrait of `Piece` containing all operations unique to a knight.
-trait Knight : Piece {}
-
-/// Subtrait of `Piece` containing all operations unique to a bishop.
-trait Bishop : Piece  {}
-
-/// Subtrait of `Piece` containing all operations unique to a rook.
-trait Rook : Piece {}
-
-/// Subtrait of `Piece` containing all operations unique to a queen.
-trait Queen : Piece {}
-
-/// Subtrait of `Piece` containing all operations unique to a king.
-trait King : Piece {}
