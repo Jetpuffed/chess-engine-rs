@@ -33,31 +33,31 @@ pub struct Board
 impl Board
 {
     /// Creates a new board with custom starting positions.
-    fn new() -> Self { todo!() }
+    pub fn new() -> Self { todo!() }
 
     /// Get the positions of all white pieces.
-    fn get_white(&self) -> Bitboard { self.white }
+    pub fn get_white(&self) -> Bitboard { self.white }
 
     /// Get the positions of all black pieces.
-    fn get_black(&self) -> Bitboard { self.black }
+    pub fn get_black(&self) -> Bitboard { self.black }
 
     /// Get the positions of all pawns, regardless of color.
-    fn get_pawns(&self) -> Bitboard { self.pawn }
+    pub fn get_pawns(&self) -> Bitboard { self.pawn }
 
     /// Get the positions of all knights, regardless of color.
-    fn get_knights(&self) -> Bitboard { self.knight }
+    pub fn get_knights(&self) -> Bitboard { self.knight }
 
     /// Get the positions of all bishops, regardless of color.
-    fn get_bishops(&self) -> Bitboard { self.bishop }
+    pub fn get_bishops(&self) -> Bitboard { self.bishop }
 
     /// Get the positions of all rooks, regardless of color.
-    fn get_rooks(&self) -> Bitboard { self.rook }
+    pub fn get_rooks(&self) -> Bitboard { self.rook }
 
     /// Get the positions of all queens, regardless of color.
-    fn get_queens(&self) -> Bitboard { self.queen }
+    pub fn get_queens(&self) -> Bitboard { self.queen }
 
     /// Get the positions of all kings, regardless of color.
-    fn get_kings(&self) -> Bitboard { self.king }
+    pub fn get_kings(&self) -> Bitboard { self.king }
 }
 
 impl Default for Board
