@@ -1,5 +1,8 @@
 //! <Module description goes here>
 
+pub mod movegen;
+pub mod tables;
+
 /// Value that represents a set of 64 individual bits.
 pub type Bitboard = u64;
 
