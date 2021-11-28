@@ -6,18 +6,82 @@ pub mod tables;
 /// Value that represents a set of 64 individual bits.
 pub type Bitboard = u64;
 
-/// Little-Endian Rank-File Mapping.
-#[repr(C)]
+/**
+    Little-Endian Rank-File Mapping.
+
+    Each variant contains:
+    - `n_lut:` Raw pointer to knight attack lookup table.
+    - `b_lut:` Raw pointer to bishop attack lookup table.
+    - `r_lut:` Raw pointer to rook attack lookup table.
+    - `q_lut:` Raw pointer to an intersection between bishop and rook attack lookup table.
+    - `k_lut:` Raw pointer to king attack lookup table.
+*/ 
 pub enum Map
 {
-    A1, B1, C1, D1, E1, F1, G1, H1,
-    A2, B2, C2, D2, E2, F2, G2, H2,
-    A3, B3, C3, D3, E3, F3, G3, H3,
-    A4, B4, C4, D4, E4, F4, G4, H4,
-    A5, B5, C5, D5, E5, F5, G5, H5,
-    A6, B6, C6, D6, E6, F6, G6, H6,
-    A7, B7, C7, D7, E7, F7, G7, H7,
-    A8, B8, C8, D8, E8, F8, G8, H8,
+    A1 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    B1 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    C1 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    D1 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    E1 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    F1 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    G1 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    H1 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    A2 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    B2 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    C2 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    D2 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    E2 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    F2 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    G2 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    H2 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    A3 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    B3 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    C3 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    D3 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    E3 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    F3 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    G3 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    H3 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    A4 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    B4 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    C4 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    D4 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    E4 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    F4 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    G4 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    H4 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    A5 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    B5 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    C5 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    D5 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    E5 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    F5 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    G5 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    H5 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    A6 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    B6 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    C6 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    D6 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    E6 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    F6 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    G6 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    H6 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    A7 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    B7 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    C7 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    D7 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    E7 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    F7 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    G7 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    H7 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    A8 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    B8 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    C8 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    D8 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    E8 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    F8 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    G8 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
+    H8 { n_lut: *const [Bitboard], b_lut: *const [Bitboard], r_lut: *const [Bitboard], q_lut: *const [Bitboard], k_lut: *const [Bitboard] },
 }
 
 /// Dense board structure that contains bitboards for individual piece types.
