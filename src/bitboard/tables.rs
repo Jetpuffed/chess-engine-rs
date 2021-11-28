@@ -82,7 +82,22 @@ pub fn create_knight_attack_lut() -> (Vec<Bitboard>, [usize; 64])
     (table, offset)
 }
 
-pub fn create_bishop_attack_lut() { todo!() }
+/// Generates all legal bishop attacks with an offset to speed up attack lookup.
+pub fn create_bishop_attack_lut() -> (Vec<Bitboard>, [usize; 64])
+{
+    let mut table = Vec::new();
+    let mut offset: [usize; 64] = [0; 64];
+
+    for (i, mask) in BISHOP_MASK_LUT.iter().enumerate()
+    {
+        offset[i] = table.len();
+        table.push(*mask);
+
+        get_all_occupancies(*mask, &mut table);
+    }
+
+    (table, offset)
+}
 
 pub fn create_rook_attack_lut() { todo!() }
 
