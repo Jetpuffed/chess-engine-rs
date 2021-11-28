@@ -135,7 +135,7 @@ pub fn create_king_mask_lut() -> [Bitboard; 64]
         let (ne, sw) = ((king << 9) & NOT_FILE_A, (king >> 9) & NOT_FILE_H);
         let (nw, se) = ((king << 7) & NOT_FILE_A, (king >> 7) & NOT_FILE_H);
 
-        *square = king ^ (n | s | e | w | ne | sw | nw | se);
+        *square = n | s | e | w | ne | sw | nw | se;
     }
 
     table
