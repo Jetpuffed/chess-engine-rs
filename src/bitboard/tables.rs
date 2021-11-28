@@ -54,9 +54,9 @@ pub fn create_bishop_mask_lut() -> [Bitboard; 64]
     for (i, square) in table.iter_mut().enumerate()
     {
         let bishop = 1 << i;
-        let (d1, d2) = ((8 * (i & 7) - (i & 56)), (56 - (8 * (i & 7) - (i & 56))));
-        let (n1, n2) = (!(d1 - 1) & (d1 >> 31), !(d2 - 1) & (d2 >> 31));
-        let (s1, s2) = (d1 & (!(d1 - 1) >> 31), d2 & (!(d2 - 1) >> 31));
+        let (d1, d2) = ((8 * (i & 7)).wrapping_sub(i & 56), (56usize.wrapping_sub(8 * (i & 7)).wrapping_sub(i & 56)));
+        let (n1, n2) = (d1.wrapping_neg() & (d1 >> 31), d2.wrapping_neg() & (d2 >> 31));
+        let (s1, s2) = (d1 & (d1.wrapping_neg() >> 31), d2 & (d2.wrapping_neg() >> 31));
 
         *square = bishop ^ (((DIAGONAL >> s1) << n1) | ((ANTIDIAG >> s2) << n2));
     }
