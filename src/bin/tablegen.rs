@@ -79,28 +79,28 @@ fn main() -> Result<(), Error>
     for s in compress_table(lut) { buf.push_str(&("    ".to_owned() + &s + "\n")) }
     buf.push_str("];\n\n");
 
-    buf.push_str(format!("pub const KNIGHT_ATTACK_OFFSET: [Bitboard; 64] = {:?};\n\n", offset).as_str());
+    buf.push_str(format!("pub const KNIGHT_ATTACK_OFFSET: [usize; 64] = {:?};\n\n", offset).as_str());
 
     let (lut, offset) = create_bishop_attack_lut();
     buf.push_str(format!("pub const BISHOP_ATTACK_LUT: [Bitboard; {}] = [\n", lut.len()).as_str());
     for s in compress_table(lut) { buf.push_str(&("    ".to_owned() + &s + "\n")) }
     buf.push_str("];\n\n");
 
-    buf.push_str(format!("pub const BISHOP_ATTACK_OFFSET: [Bitboard; 64] = {:?};\n\n", offset).as_str());
+    buf.push_str(format!("pub const BISHOP_ATTACK_OFFSET: [usize; 64] = {:?};\n\n", offset).as_str());
 
     let (lut, offset) = create_rook_attack_lut();
     buf.push_str(format!("pub const ROOK_ATTACK_LUT: [Bitboard; {}] = [\n", lut.len()).as_str());
     for s in compress_table(lut) { buf.push_str(&("    ".to_owned() + &s + "\n")) }
     buf.push_str("];\n\n");
 
-    buf.push_str(format!("pub const ROOK_ATTACK_OFFSET: [Bitboard; 64] = {:?};\n\n", offset).as_str());
+    buf.push_str(format!("pub const ROOK_ATTACK_OFFSET: [usize; 64] = {:?};\n\n", offset).as_str());
 
     let (lut, offset) = create_king_attack_lut();
     buf.push_str(format!("pub const KING_ATTACK_LUT: [Bitboard; {}] = [\n", lut.len()).as_str());
     for s in compress_table(lut) { buf.push_str(&("    ".to_owned() + &s + "\n")) }
     buf.push_str("];\n\n");
 
-    buf.push_str(format!("pub const KING_ATTACK_OFFSET: [Bitboard; 64] = {:?};\n\n", offset).as_str());
+    buf.push_str(format!("pub const KING_ATTACK_OFFSET: [usize; 64] = {:?};\n\n", offset).as_str());
 
     // Write the buffer to the output file, returning either a success value or an error.
     output_file.write_all(buf.as_bytes())
