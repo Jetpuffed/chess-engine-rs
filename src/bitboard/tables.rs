@@ -83,4 +83,24 @@ pub fn create_rook_mask_lut() -> [Bitboard; 64]
     table
 }
 
-pub fn create_king_mask_lut() { todo!() }
+/// Generates all legal king moves.
+pub fn create_king_mask_lut() -> [Bitboard; 64]
+{
+    const NOT_FILE_A: Bitboard = 0x7F7F7F7F7F7F7F7F;
+    const NOT_FILE_H: Bitboard = 0xFEFEFEFEFEFEFEFE;
+
+    let mut table: [Bitboard; 64] = [0; 64];
+
+    for (i, square) in table.iter_mut().enumerate()
+    {
+        let king = 1 << i;
+        let (n, s) = (king << 8, king >> 8);
+        let (e, w) = ((king << 1) & NOT_FILE_A, (king >> 1) & NOT_FILE_H);
+        let (ne, sw) = ((king << 9) & NOT_FILE_A, (king >> 9) & NOT_FILE_H);
+        let (nw, se) = ((king << 7) & NOT_FILE_A, (king >> 7) & NOT_FILE_H);
+
+        *square = king ^ (n | s | e | w | ne | sw | nw | se);
+    }
+
+    table
+}
