@@ -64,6 +64,23 @@ pub fn create_bishop_mask_lut() -> [Bitboard; 64]
     table
 }
 
-pub fn create_rook_mask_lut() { todo!() }
+/// Generates all legal rook moves.
+pub fn create_rook_mask_lut() -> [Bitboard; 64]
+{
+    const RANK: Bitboard = 0x00000000000000FF;
+    const FILE: Bitboard = 0x0101010101010101;
+
+    let mut table: [Bitboard; 64] = [0; 64];
+
+    for (i, square) in table.iter_mut().enumerate()
+    {
+        let rook = 1 << i;
+        let (r, f) = (RANK << (i & 56), FILE << (i & 7));
+
+        *square = rook ^ (r | f);
+    }
+
+    table
+}
 
 pub fn create_king_mask_lut() { todo!() }
