@@ -52,7 +52,35 @@ pub const KING_MASK_LUT: [Bitboard; 64] =
     0x0283800000000000, 0x0406000000000000, 0x0A0E000000000000, 0x141C000000000000, 0x2838000000000000, 0x5070000000000000, 0x20E0000000000000, 0x40C0000000000000,
 ];
 
-pub fn create_knight_attack_lut() { todo!() }
+/// Generates all occupancies for any given mask.
+fn get_all_occupancies(mask: u64, lut_ptr: &mut Vec<u64>)
+{
+    let mut occ = mask;
+
+    for _ in 0 .. (1 << mask.count_ones()) - 1
+    {
+        occ = occ.saturating_sub(1);
+        occ &= mask;
+        lut_ptr.push(occ);
+    }
+}
+
+/// Generates all legal knight attacks with an offset to speed up attack lookup.
+pub fn create_knight_attack_lut() -> (Vec<Bitboard>, [usize; 64])
+{
+    let mut table = Vec::new();
+    let mut offset: [usize; 64] = [0; 64];
+
+    for (i, mask) in KNIGHT_MASK_LUT.iter().enumerate()
+    {
+        offset[i] = table.len();
+        table.push(*mask);
+
+        get_all_occupancies(*mask, &mut table);
+    }
+
+    (table, offset)
+}
 
 pub fn create_bishop_attack_lut() { todo!() }
 
