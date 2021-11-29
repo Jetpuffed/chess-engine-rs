@@ -83,7 +83,7 @@ impl Board
     pub fn get_kings(&self) -> Bitboard { self.king }
 
     /// Check if any pieces occupy the squares a pawn on `sq` can attack.
-    pub fn get_pawn_attacks(&self, sq: Square) -> Bitboard { todo!() }
+    pub fn get_pawn_blockers(&self, sq: Square) -> Bitboard { todo!() }
 
     /// Check if any pieces occupy the squares a knight on `sq` can attack.
     pub fn get_knight_blockers(&self, sq: Square) -> Bitboard
@@ -102,7 +102,7 @@ impl Board
     }
 
     /// Check if any pieces occupy the squares a rook on `sq` can attack.
-    pub fn get_rook_attacks(&self, sq: Square) -> Bitboard
+    pub fn get_rook_blockers(&self, sq: Square) -> Bitboard
     {
         let msk = ROOK_MASK_LUT[sq as usize];
 
@@ -110,7 +110,7 @@ impl Board
     }
 
     /// Check if any pieces occupy the squares a queen on `sq` can attack.
-    pub fn get_queen_attacks(&self, sq: Square) -> Bitboard
+    pub fn get_queen_blockers(&self, sq: Square) -> Bitboard
     {
         let msk = BISHOP_MASK_LUT[sq as usize] | ROOK_MASK_LUT[sq as usize];
 
@@ -118,7 +118,7 @@ impl Board
     }
 
     /// Check if any pieces occupy the squares a king on `sq` can attack.
-    pub fn get_king_attacks(&self, sq: Square) -> Bitboard
+    pub fn get_king_blockers(&self, sq: Square) -> Bitboard
     {
         let msk = KING_MASK_LUT[sq as usize];
 
