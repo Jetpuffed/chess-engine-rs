@@ -74,28 +74,28 @@ fn main() -> Result<(), Error>
         Attack lookup table generators
     */
 
-    let (lut, offset) = create_knight_attack_lut();
+    let (lut, offset) = create_knight_attack_lut(&create_knight_mask_lut());
     buf.push_str(format!("pub const KNIGHT_ATTACK_LUT: [Bitboard; {}] = [\n", lut.len()).as_str());
     for s in compress_table(lut) { buf.push_str(&("    ".to_owned() + &s + "\n")) }
     buf.push_str("];\n\n");
 
     buf.push_str(format!("pub const KNIGHT_ATTACK_OFFSET: [usize; 64] = {:?};\n\n", offset).as_str());
 
-    let (lut, offset) = create_bishop_attack_lut();
+    let (lut, offset) = create_bishop_attack_lut(&create_bishop_mask_lut());
     buf.push_str(format!("pub const BISHOP_ATTACK_LUT: [Bitboard; {}] = [\n", lut.len()).as_str());
     for s in compress_table(lut) { buf.push_str(&("    ".to_owned() + &s + "\n")) }
     buf.push_str("];\n\n");
 
     buf.push_str(format!("pub const BISHOP_ATTACK_OFFSET: [usize; 64] = {:?};\n\n", offset).as_str());
 
-    let (lut, offset) = create_rook_attack_lut();
+    let (lut, offset) = create_rook_attack_lut(&create_rook_mask_lut());
     buf.push_str(format!("pub const ROOK_ATTACK_LUT: [Bitboard; {}] = [\n", lut.len()).as_str());
     for s in compress_table(lut) { buf.push_str(&("    ".to_owned() + &s + "\n")) }
     buf.push_str("];\n\n");
 
     buf.push_str(format!("pub const ROOK_ATTACK_OFFSET: [usize; 64] = {:?};\n\n", offset).as_str());
 
-    let (lut, offset) = create_king_attack_lut();
+    let (lut, offset) = create_king_attack_lut(&create_king_mask_lut());
     buf.push_str(format!("pub const KING_ATTACK_LUT: [Bitboard; {}] = [\n", lut.len()).as_str());
     for s in compress_table(lut) { buf.push_str(&("    ".to_owned() + &s + "\n")) }
     buf.push_str("];\n\n");
