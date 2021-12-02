@@ -47,6 +47,56 @@ pub const KING_MASK_LUT: [Bitboard; 64] =
     0x0283800000000000, 0x0406000000000000, 0x0A0E000000000000, 0x141C000000000000, 0x2838000000000000, 0x5070000000000000, 0x20E0000000000000, 0x40C0000000000000,
 ];
 
+/// Serial implementation of _pext_u64. Only used if BMI2 is not available.
+/**
+    Extract bits from unsigned 64-bit integer `a` at the corresponding bit
+    locations specified by `mask` to contiguous low bits in `dst`. The remaining
+    upper bits in `dst` are set to zero.
+*/
+fn pext_u64(a: u64, mask: u64) -> u64
+{
+    let mut dst = 0;
+    let (mut k, mut m) = (1, mask);
+
+    while m != 0
+    {
+        if (a & m & m.wrapping_neg()) != 0
+        {
+            dst |= k;
+        }
+
+        k += k;
+        m &= m - 1;
+    }
+
+    dst
+}
+
+/// Serial implementation of _pdep_u64. Only used if BMI2 is not available.
+/**
+    Deposit contiguous low bits from unsigned 64-bit integer `a` to `dst` at the
+    corresponding bit locations specified by `mask`. All other bits in `dst` are
+    set to zero.
+*/
+fn pdep_u64(a: u64, mask: u64) -> u64
+{
+    let mut dst = 0;
+    let (mut k, mut m) = (1, mask);
+
+    while m != 0
+    {
+        if a & k != 0
+        {
+            dst |= m & m.wrapping_neg();
+        }
+
+        k += k;
+        m &= m.saturating_sub(1);
+    }
+
+    dst
+}
+
 /// Generic attack lookup table generator.
 macro_rules! create_attack_lut {
     ($lut:tt) => {
